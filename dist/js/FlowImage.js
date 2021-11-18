@@ -13,22 +13,18 @@ class FlowImage {
         this.canvas.height = this.image.height;
         (_a = this.ctx) === null || _a === void 0 ? void 0 : _a.drawImage(this.image, 0, 0);
         this.fillLightnessArray();
-        for (let i = 0; i < 200; i += 5) {
+        for (let i = 0; i < 200; i += particleSize) {
             for (let j = 0; j < 2; j++) {
-                this.particles.push(new Particle(j * 100 * Math.random(), i));
+                this.particles.push(new Particle(j * 100 * Math.random(), i, this.particleSize));
             }
         }
         this.ctx.clearRect(0, 0, this.image.width, this.image.height);
-        let ival = setInterval(() => {
+        setInterval(() => {
             this.particles.forEach((p) => {
                 p.update(this.ctx, this.lightnessArray);
             });
-            //clearInterval(ival);
         }, 20);
     }
-    /**
-     * Get the brightness of
-     */
     fillLightnessArray() {
         var _a;
         for (let y = 0; y < this.canvas.height; y += this.lightnessGridSize) {
